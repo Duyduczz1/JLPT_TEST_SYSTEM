@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{# =========================================================
+Trang chủ hệ thống luyện thi JLPT
+========================================================= #}
+
+{% block title %}
+Trang chủ - JLPT Test
+{% endblock %}
+
+{% block content %}
+
+<!-- ======================================================
+     HERO SECTION
+     Phần giới thiệu chính của trang
+     ====================================================== -->
+<section class="hero">
+
+  <div>
+
+    <!-- Dòng chữ nhỏ phía trên tiêu đề -->
+    <p class="eyebrow">
+      Luyện thi JLPT từ N5 đến N1
+    </p>
+
+    <!-- Tiêu đề chính -->
+    <h1>
+      Luyện thi JLPT nhanh gọn, dễ sử dụng và dễ theo dõi tiến bộ.
+    </h1>
+
+    <!-- Mô tả ngắn -->
+    <p>
+      Chọn cấp độ phù hợp, làm bài theo số câu mong muốn
+      và xem kết quả ngay sau khi nộp bài.
+    </p>
+
+    <!-- Nhóm nút chức năng -->
+    <div class="actions">
+
+      <!-- Nút bắt đầu làm bài -->
+      <a class="button" href="{{ url_for('exam.levels') }}">
+        Bắt đầu làm bài
+      </a>
+
+      <!-- Nút đăng nhập -->
+      <a class="button ghost" href="{{ url_for('auth.login') }}">
+        Đăng nhập
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ======================================================
+     PHẦN GIỚI THIỆU TÍNH NĂNG
+     ====================================================== -->
+<section class="grid three">
+
+  <!-- Tính năng 1 -->
+  <article>
+    <h3>5 cấp độ JLPT</h3>
+
+    <p>
+      Hỗ trợ đầy đủ các cấp độ:
+      N5, N4, N3, N2 và N1.
+    </p>
+  </article>
+
+  <!-- Tính năng 2 -->
+  <article>
+    <h3>Chấm điểm tự động</h3>
+
+    <p>
+      Hệ thống tự động tính điểm,
+      hiển thị số câu đúng và gợi ý ôn tập.
+    </p>
+  </article>
+
+  <!-- Tính năng 3 -->
+  <article>
+    <h3>Lịch sử và bảng xếp hạng</h3>
+
+    <p>
+      Theo dõi kết quả làm bài
+      và so sánh điểm số với người khác.
+    </p>
+  </article>
+
+</section>
+
+{% endblock %}

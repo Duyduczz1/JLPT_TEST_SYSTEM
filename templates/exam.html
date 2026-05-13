@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{# =========================================================
+Trang làm bài thi JLPT
+========================================================= #}
+
+<!-- ======================================================
+     CSS riêng cho trang thi
+     ====================================================== -->
+{% block head %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/exam.css') }}">
+
+{% endblock %}
+
+{% block content %}
+
+<!-- ======================================================
+     PHẦN ĐẦU TRANG THI
+     ====================================================== -->
+<div class="exam-head">
+
+  <!-- Hiển thị cấp độ và số câu -->
+  <h1>
+    {{ level }} - {{ amount }} câu
+  </h1>
+
+  <!-- Bộ đếm thời gian -->
+  <!-- data-minutes:
+       Mỗi câu = 2 phút -->
+  <div id="timer" data-minutes="{{ amount * 2 }}">
+  </div>
+
+</div>
+
+<!-- ======================================================
+     FORM LÀM BÀI
+     ====================================================== -->
+<form method="post" action="{{ url_for('result.submit', level=level) }}" class="exam-form">
+
+  <!-- ====================================================
+       VÒNG LẶP HIỂN THỊ DANH SÁCH CÂU HỎI
+       ==================================================== -->
+  {% for q in questions %}
+
+  <section class="question">
+
+    <!-- Nội dung câu hỏi -->
+    <h3>
+
+      Câu {{ loop.index }}.
+
+      {{ q.question }}
+
+    </h3>
+
+    <!-- ==================================================
+         HIỂN THỊ 4 ĐÁP ÁN A B C D
+         ================================================== -->
+    {% for key, text in [
+    ('A', q.option_a),
+    ('B', q.option_b),
+    ('C', q.option_c),
+    ('D', q.option_d)
+    ] %}
+
+    <label class="option">
+
+      <!-- Radio chọn đáp án -->
+      <input type="radio" name="answer_{{ q.id }}" value="{{ key }}" required>
+
+      <!-- Nội dung đáp án -->
+      <span>
+
+        {{ key }}.
+
+        {{ text }}
+
+      </span>
+
+    </label>
+
+    {% endfor %}
+
+  </section>
+
+  {% endfor %}
+
+  <!-- ====================================================
+       NÚT NỘP BÀI
+       ==================================================== -->
+  <button class="button" type="submit">
+    Nộp bài
+  </button>
+
+</form>
+
+{% endblock %}
+
+<!-- ======================================================
+     JAVASCRIPT RIÊNG CHO TRANG THI
+     ====================================================== -->
+{% block scripts %}
+
+<!-- File xử lý đồng hồ đếm ngược -->
+<script src="{{ url_for('static', filename='js/timer.js') }}"></script>
+
+<!-- File xử lý chức năng bài thi -->
+<script src="{{ url_for('static', filename='js/exam.js') }}"></script>
+
+{% endblock %}

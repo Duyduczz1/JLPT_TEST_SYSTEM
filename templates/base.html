@@ -1,0 +1,151 @@
+<!doctype html>
+
+<html lang="vi">
+
+<head>
+
+  <!-- =====================================================
+       CÀI ĐẶT CƠ BẢN
+       ===================================================== -->
+
+  <!-- Bộ mã tiếng Việt -->
+  <meta charset="utf-8">
+
+  <!-- Responsive cho điện thoại -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Tiêu đề trang -->
+  <title>
+    {% block title %}
+    JLPT Test System
+    {% endblock %}
+  </title>
+
+  <!-- File CSS chính -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- Block mở rộng cho CSS riêng từng trang -->
+  {% block head %}
+  {% endblock %}
+
+</head>
+
+<body>
+
+  <!-- =====================================================
+       THANH MENU ĐẦU TRANG
+       ===================================================== -->
+  <nav class="topbar">
+
+    <!-- Logo / tên hệ thống -->
+    <a class="brand" href="{{ url_for('index') }}">
+      JLPT Test
+    </a>
+
+    <!-- Các liên kết menu -->
+    <div class="navlinks">
+
+      <!-- ================================================
+           Nếu người dùng đã đăng nhập
+           ================================================ -->
+      {% if session.get('user_id') %}
+
+      <!-- Trang dashboard -->
+      <a href="{{ url_for('dashboard') }}">
+        Trang chủ
+      </a>
+
+      <!-- Trang làm bài -->
+      <a href="{{ url_for('exam.levels') }}">
+        Làm bài
+      </a>
+
+      <!-- Lịch sử làm bài -->
+      <a href="{{ url_for('history.history') }}">
+        Lịch sử
+      </a>
+
+      <!-- Bảng xếp hạng -->
+      <a href="{{ url_for('ranking.ranking') }}">
+        BXH
+      </a>
+
+      <!-- ============================================
+             Nếu là admin thì hiển thị menu Admin
+             ============================================ -->
+      {% if session.get('role') == 'admin' %}
+
+      <a href="{{ url_for('admin.dashboard') }}">
+        Admin
+      </a>
+
+      {% endif %}
+
+      <!-- Đăng xuất -->
+      <a href="{{ url_for('auth.logout') }}">
+        Đăng xuất
+      </a>
+
+      <!-- ================================================
+           Nếu chưa đăng nhập
+           ================================================ -->
+      {% else %}
+
+      <!-- Đăng nhập -->
+      <a href="{{ url_for('auth.login') }}">
+        Đăng nhập
+      </a>
+
+      <!-- Đăng ký -->
+      <a class="button small" href="{{ url_for('auth.register') }}">
+        Đăng ký
+      </a>
+
+      {% endif %}
+
+    </div>
+
+  </nav>
+
+  <!-- =====================================================
+       NỘI DUNG CHÍNH
+       ===================================================== -->
+  <main class="container">
+
+    <!-- ================================================
+         Hiển thị thông báo Flash Message
+         Ví dụ:
+         - Đăng nhập thành công
+         - Sai mật khẩu
+         - Đăng ký thành công
+         ================================================ -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% for category, message in messages %}
+
+    <div class="flash {{ category }}">
+      {{ message }}
+    </div>
+
+    {% endfor %}
+
+    {% endwith %}
+
+    <!-- Nội dung riêng của từng trang -->
+    {% block content %}
+    {% endblock %}
+
+  </main>
+
+  <!-- =====================================================
+       FILE JAVASCRIPT CHÍNH
+       ===================================================== -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+  <!-- Block mở rộng cho JS riêng từng trang -->
+  {% block scripts %}
+  {% endblock %}
+
+</body>
+
+</html>

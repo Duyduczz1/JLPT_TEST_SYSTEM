@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{# =========================================================
+Trang Dashboard sau khi người dùng đăng nhập
+========================================================= #}
+
+{% block content %}
+
+<!-- ======================================================
+     KHUNG CHÍNH DASHBOARD
+     ====================================================== -->
+<section class="panel">
+
+  <!-- Tiêu đề chào người dùng -->
+  <h1>
+
+    Xin chào
+
+    <!-- Lấy tên người dùng từ session -->
+    {{ session.get('user_name', 'bạn') }}
+
+  </h1>
+
+  <!-- Mô tả ngắn -->
+  <p>
+    Hãy chọn một bài luyện thi để bắt đầu.
+  </p>
+
+  <!-- ====================================================
+       NHÓM NÚT CHỨC NĂNG
+       ==================================================== -->
+  <div class="actions">
+
+    <!-- Nút chọn cấp độ -->
+    <a class="button" href="{{ url_for('exam.levels') }}">
+      Chọn cấp độ
+    </a>
+
+    <!-- Nút xem lịch sử -->
+    <a class="button ghost" href="{{ url_for('history.history') }}">
+      Xem lịch sử
+    </a>
+
+  </div>
+
+</section>
+
+{% endblock %}
