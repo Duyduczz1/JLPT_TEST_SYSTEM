@@ -1,29 +1,30 @@
 # JLPT Test System (N1-N5)
 
-Du an Flask de luyen thi JLPT voi dang nhap, dang ky, chon cap do N1-N5, lam bai 10-50 cau, cham diem, lich su va bang xep hang.
+Dự án Flask để luyện thi JLPT với đăng nhập, đăng ký, chọn cấp độ N1–N5, làm bài 10–50 câu, chấm điểm, lịch sử và bảng xếp hạng.
 
-## Chay bang VS Code
+## Chạy bằng VS Code
 
 ```bash
-cd C:\web_app\JLPT-TEST-SYSTEM_test01
+
+cd C:\web_app\JLPT-TEST-WEB
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
 python database/create_db.py
 python database/seed_questions.py
 python app.py
+
 ```
 
-Mo trinh duyet: http://127.0.0.1:5000
+Mở trình duyệt: http://127.0.0.1:5000
 
-Tai khoan admin mac dinh:
+Tài khoản admin mặc định:
 
 - Email: admin@jlpt.local
-- Mat khau: admin123
+- Mật khẩu: admin123
 
-## Noi dung
-
-- Flask routes cho auth, exam, result, history, ranking va admin.
-- SQLite database voi users, questions, results.
-- Du lieu mau cho N1-N5.
-- Giao dien HTML/CSS/JS co timer lam bai.
+Nội dung
+Flask routes cho auth, exam, result, history, ranking và admin.
+SQLite database với users, questions, results.
+Dữ liệu mẫu cho N1–N5.
+Giao diện HTML/CSS/JS có timer làm bài.
