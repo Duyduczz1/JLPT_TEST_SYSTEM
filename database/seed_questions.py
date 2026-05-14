@@ -145,7 +145,7 @@ SAMPLE = {
         ("会社は 朝 9時から 夕方 6時までです。 質問：何時に 仕事が終わりますか。", "午後 6時", "午前 9時", "午後 5時", "正午", "A", "Kết thúc lúc 6h chiều (6時まで)."),
         ("昨日は とても 寒かったです。今日は 暖かいです。 質問：昨日の 天気は どうでしたか。", "寒かった", "暖かかった", "暑かった", "涼しかった", "A", "Hôm qua lạnh (寒かった)."),
         ("この バスは 空港へ 行きますか。いいえ、行きません。 質問：バスは 空港へ 行きますか。", "行きません", "行きます", "時々 行きます", "わかりません", "A", "Trả lời là không đi."),
-        ("私は りんごが 好きです。みかんも 好きです。 質問：何が 好きですか。", "両方 好き", "りんごだけ", "みかんだけ", "どちら cả hai (も 好き)."),
+        ("私は りんごが 好きです。みかんも 好きです。 質問：何が 好きですか。", "両方 好き", "りんごだけ", "みかんだけ", "どちらも 好きではない", "A", "Cả hai đều thích (も 好き)."),
     ],
 
     # ======================================================
@@ -588,27 +588,13 @@ def randomize_options(question_tuple):
 # ==========================================================
 
 def main():
-
-    # Tạo database
     create_database()
 
-    # Tạo tài khoản admin
-    create_user("admin", "admin@example.com", "admin123", "admin")
-
-    # Seed questions
-    for level, questions in SAMPLE.items():
-        for q in questions:
-            randomized_q = randomize_options(q)
-            create_question(level, *randomized_q)
-
-
-if __name__ == "__main__":
-    main()
     if not get_user_by_email("admin@jlpt.local"):
         create_user("Admin", "admin@jlpt.local", "admin123", role="admin")
 
-    # Xóa câu hỏi cũ và seed lại toàn bộ 100 câu mỗi cấp
     from utils.db_helper import execute
+
     execute("DELETE FROM questions")
 
     for level, questions in SAMPLE.items():
@@ -621,10 +607,6 @@ if __name__ == "__main__":
         n = count_questions(level)
         print(f"  {level}: {n} questions")
 
-
-# ==========================================================
-# CHẠY FILE
-# ==========================================================
 
 if __name__ == "__main__":
     main()
