@@ -591,7 +591,7 @@ def main():
     create_database()
 
     if not get_user_by_email("admin@jlpt.local"):
-        create_user("Admin", "admin@jlpt.local", "admin123", role="admin")
+        create_user("Admin", "admin@jlpt.local", "Duyduc1112", role="admin")
 
     from utils.db_helper import execute
 
