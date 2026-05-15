@@ -18,10 +18,11 @@ python app.py
 
 Mở trình duyệt: http://127.0.0.1:5000
 
+https://jlpt-test-system.onrender.com
 Tài khoản admin mặc định:
 
 - Email: admin@jlpt.local
-- Mật khẩu: admin123
+- Mật khẩu: Duyduc1112
 
 Nội dung
 Flask routes cho auth, exam, result, history, ranking và admin.
