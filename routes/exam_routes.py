@@ -38,13 +38,13 @@ from routes.auth_routes import login_required
 
 from services.exam_service import (
 
-    # Lấy danh sách cấp độ JLPT
+    # JLPT レベル一覧を取得
     available_levels,
 
-    # Lấy danh sách số lượng câu hỏi
+    # 問題数一覧を取得
     available_test_sizes,
 
-    # Tạo đề thi
+    # 試験を作成
     build_exam
 
 )
@@ -131,15 +131,15 @@ def exam(level, amount):
     questions = build_exam(level, amount)
 
     # ======================================================
-    # KIỂM TRA CÓ CÂU HỎI HAY KHÔNG
+    # 問題があるかどうかをチェック
     # ======================================================
 
     if not questions:
 
-        # Hiển thị thông báo
+        # 警告メッセージを表示
         flash(
 
-            "Không tìm thấy câu hỏi phù hợp.",
+            "適切な問題が見つかりませんでした。",
 
             "warning"
         )
@@ -162,7 +162,7 @@ def exam(level, amount):
         # Cấp độ JLPT
         level=level,
 
-        # Số lượng câu hỏi
+        # 問題数
         amount=amount,
 
         # Danh sách câu hỏi

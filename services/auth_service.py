@@ -3,30 +3,30 @@ from models.user_model import create_user, verify_user
 
 
 # =========================
-# ĐĂNG KÝ USER
+# ユーザー登録
 # =========================
 def register_user(name, email, password):
     try:
         # Gọi hàm tạo user mới trong database
         create_user(name, email, password)
 
-        # Đăng ký thành công
-        return True, "Đăng ký thành công. Hãy đăng nhập."
+        # 登録成功
+        return True, "登録が完了しました。ログインしてください。"
     except IntegrityError:
-        # Lỗi này xảy ra khi email đã tồn tại (unique constraint)
-        return False, "Email đã tồn tại."
+        # このエラーはメールアドレスが既に存在する場合に発生します（unique constraint）
+        return False, "メールアドレスは既に登録されています。"
 
 
 # =========================
-# ĐĂNG NHẬP USER
+# ユーザーログイン
 # =========================
 def login_user(email, password):
     # Kiểm tra email + password trong database
     user = verify_user(email, password)
 
-    # Nếu không tìm thấy user hợp lệ
+    # 有効なユーザーが見つからない場合
     if not user:
-        return None, "Email hoặc mật khẩu không đúng."
+        return None, "メールアドレスまたはパスワードが正しくありません。"
 
-    # Đăng nhập thành công
-    return user, "Đăng nhập thành công."
+    # ログイン成功
+    return user, "ログインに成功しました。"

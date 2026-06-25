@@ -14,26 +14,26 @@ def available_test_sizes():
 
 def build_exam(level, amount):
     """
-    Lấy ngẫu nhiên `amount` câu hỏi từ kho 100 câu của cấp độ `level`.
+    指定レベルの100問から `amount` 問をランダムに選択します。
 
-    Quy trình:
-    1. Kiểm tra level và amount hợp lệ.
-    2. Lấy toàn bộ 100 câu của cấp độ từ DB.
-    3. Dùng random.sample() để chọn ngẫu nhiên đúng số lượng yêu cầu.
-    4. Trả về danh sách câu hỏi đã xáo trộn.
+    手順:
+    1. level と amount が有効かを確認します。
+    2. DBからそのレベルの全100問を取得します。
+    3. random.sample() で必要数をランダムに選びます。
+    4. シャッフルされた問題リストを返します。
     """
     if level not in ALLOWED_LEVELS or amount not in ALLOWED_TEST_SIZES:
         return []
 
-    # Lấy toàn bộ câu hỏi của cấp độ (không giới hạn LIMIT)
+    # レベルの全問題を取得 (LIMITなし)
     all_questions = get_questions(level)
 
     if not all_questions:
         return []
 
-    # Nếu kho câu hỏi ít hơn yêu cầu, trả về tất cả (đã xáo trộn)
+    # 問題数が要求より少ない場合、全件をシャッフルして返します
     if len(all_questions) <= amount:
         return random.sample(all_questions, len(all_questions))
 
-    # Lấy ngẫu nhiên đúng số lượng câu từ kho 100 câu
+    # 100問から指定数をランダムに選択
     return random.sample(all_questions, amount)

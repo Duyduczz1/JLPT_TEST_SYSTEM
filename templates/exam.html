@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {# =========================================================
-Trang làm bài thi JLPT
+JLPT試験ページ
 ========================================================= #}
 
 <!-- ======================================================
-     CSS riêng cho trang thi
+     試験ページ専用CSS
      ====================================================== -->
 {% block head %}
 
@@ -16,30 +16,30 @@ Trang làm bài thi JLPT
 {% block content %}
 
 <!-- ======================================================
-     PHẦN ĐẦU TRANG THI
+     試験ヘッダー
      ====================================================== -->
 <div class="exam-head">
 
-  <!-- Hiển thị cấp độ và số câu -->
+  <!-- レベルと問題数を表示 -->
   <h1>
-    {{ level }} - {{ amount }} câu
+    {{ level }} - {{ amount }}問
   </h1>
 
-  <!-- Bộ đếm thời gian -->
+  <!-- タイマー -->
   <!-- data-minutes:
-       Mỗi câu = 2 phút -->
+       1問 = 2分 -->
   <div id="timer" data-minutes="{{ amount * 2 }}">
   </div>
 
 </div>
 
 <!-- ======================================================
-     FORM LÀM BÀI
+     試験フォーム
      ====================================================== -->
 <form method="post" action="{{ url_for('result.submit', level=level) }}" class="exam-form">
 
   <!-- ====================================================
-       VÒNG LẶP HIỂN THỊ DANH SÁCH CÂU HỎI
+       問題リストの繰り返し表示
        ==================================================== -->
   {% for q in questions %}
 
@@ -48,7 +48,7 @@ Trang làm bài thi JLPT
     <!-- Nội dung câu hỏi -->
     <h3>
 
-      Câu {{ loop.index }}.
+      問{{ loop.index }}.
 
       {{ q.question | safe }}
 
@@ -66,10 +66,10 @@ Trang làm bài thi JLPT
 
     <label class="option">
 
-      <!-- Radio chọn đáp án -->
+      <!-- 解答ラジオボタン -->
       <input type="radio" name="answer_{{ q.id }}" value="{{ key }}" required>
 
-      <!-- Nội dung đáp án -->
+      <!-- 選択肢テキスト -->
       <span>
 
         {{ key }}.
@@ -87,10 +87,10 @@ Trang làm bài thi JLPT
   {% endfor %}
 
   <!-- ====================================================
-       NÚT NỘP BÀI
+       提出ボタン
        ==================================================== -->
   <button class="button" type="submit">
-    Nộp bài
+    提出する
   </button>
 
 </form>
@@ -98,14 +98,14 @@ Trang làm bài thi JLPT
 {% endblock %}
 
 <!-- ======================================================
-     JAVASCRIPT RIÊNG CHO TRANG THI
+     試験ページ専用JavaScript
      ====================================================== -->
 {% block scripts %}
 
-<!-- File xử lý đồng hồ đếm ngược -->
+<!-- カウントダウンタイマーのスクリプト -->
 <script src="{{ url_for('static', filename='js/timer.js') }}"></script>
 
-<!-- File xử lý chức năng bài thi -->
+<!-- 試験機能のスクリプト -->
 <script src="{{ url_for('static', filename='js/exam.js') }}"></script>
 
 {% endblock %}

@@ -1,44 +1,44 @@
 {% extends "base.html" %}
 
 {# =========================================================
-Trang Dashboard sau khi người dùng đăng nhập
+ログイン後ダッシュボードページ
 ========================================================= #}
 
 {% block content %}
 
 <!-- ======================================================
-     KHUNG CHÍNH DASHBOARD
+     ダッシュボード
      ====================================================== -->
 <section class="panel">
 
-  <!-- Tiêu đề chào người dùng -->
+  <!-- ユーザーへの挨拶 -->
   <h1>
 
-    Xin chào
+    こんにちは
 
-    <!-- Lấy tên người dùng từ session -->
-    {{ session.get('user_name', 'bạn') }}
+    <!-- セッションからユーザー名を取得 -->
+    {{ session.get('user_name', 'ユーザー') }}
 
   </h1>
 
-  <!-- Mô tả ngắn -->
+  <!-- 短い説明 -->
   <p>
-    Hãy chọn một bài luyện thi để bắt đầu.
+    試験を選んで、すぐに開始してください。
   </p>
 
   <!-- ====================================================
-       NHÓM NÚT CHỨC NĂNG
+       操作ボタン
        ==================================================== -->
   <div class="actions">
 
-    <!-- Nút chọn cấp độ -->
+    <!-- レベルを選択 -->
     <a class="button" href="{{ url_for('exam.levels') }}">
-      Chọn cấp độ
+      レベルを選ぶ
     </a>
 
-    <!-- Nút xem lịch sử -->
+    <!-- 履歴を見る -->
     <a class="button ghost" href="{{ url_for('history.history') }}">
-      Xem lịch sử
+      履歴を見る
     </a>
 
   </div>

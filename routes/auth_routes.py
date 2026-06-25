@@ -20,10 +20,10 @@ from functools import wraps
 # Render file HTML
 #
 # request:
-# Lấy dữ liệu form
+# フォームデータを取得
 #
 # session:
-# Lưu trạng thái đăng nhập
+# ログイン状態を保存
 #
 # url_for:
 # Tạo URL động
@@ -50,10 +50,10 @@ from models.user_model import get_user_by_id
 
 from services.auth_service import (
 
-    # Xử lý đăng nhập
+    # ログインを処理する
     login_user,
 
-    # Xử lý đăng ký
+    # 登録を処理する
     register_user
 
 )
@@ -72,20 +72,20 @@ auth_bp = Blueprint(
 
 # ==========================================================
 # HÀM:
-# LẤY THÔNG TIN USER HIỆN TẠI
+# 現在のユーザー情報を取得
 # ==========================================================
 
 def current_user():
 
-    # Lấy user_id trong session
+    # セッションから user_id を取得
     user_id = session.get("user_id")
 
-    # Nếu có user_id thì lấy user
+    # user_id があればユーザーを取得
     return get_user_by_id(user_id) if user_id else None
 
 # ==========================================================
 # DECORATOR:
-# KIỂM TRA ĐĂNG NHẬP
+# ログインチェック
 # ==========================================================
 
 def login_required(view):
@@ -94,26 +94,26 @@ def login_required(view):
 
     def wrapped(*args, **kwargs):
 
-        # Nếu chưa đăng nhập
+        # ログインしていない場合
         if not session.get("user_id"):
 
-            # Hiển thị thông báo
+            # メッセージを表示
             flash(
 
-                "Vui lòng đăng nhập trước.",
+                "先にログインしてください。",
 
                 "warning"
 
             )
 
-            # Chuyển về trang login
+            # ログインページへリダイレクト
             return redirect(
 
                 url_for("auth.login")
 
             )
 
-        # Nếu đã đăng nhập
+        # ログイン済みの場合
         return view(*args, **kwargs)
 
     return wrapped
@@ -132,13 +132,13 @@ def admin_required(view):
         # Lấy user hiện tại
         user = current_user()
 
-        # Nếu không phải admin
+        # 管理者でない場合
         if not user or user["role"] != "admin":
 
-            # Hiển thị thông báo
+            # メッセージを表示
             flash(
 
-                "Bạn không có quyền truy cập trang admin.",
+                "管理者ページにアクセスする権限がありません。",
 
                 "danger"
 
@@ -302,10 +302,10 @@ def logout():
     # Xóa toàn bộ session
     session.clear()
 
-    # Hiển thị thông báo
+    # 情報メッセージを表示
     flash(
 
-        "Đã đăng xuất.",
+        "ログアウトしました。",
 
         "info"
 

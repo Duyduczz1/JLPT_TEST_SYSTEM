@@ -2,9 +2,9 @@
 # IMPORT HÀM DATABASE
 # ==========================================================
 
-# execute   : dùng cho INSERT / UPDATE / DELETE
-# fetch_all : lấy nhiều dòng dữ liệu
-# fetch_one : lấy 1 dòng dữ liệu
+# execute   : INSERT / UPDATE / DELETE 用
+# fetch_all : 複数行データ取得用
+# fetch_one : 1行データ取得用
 
 from utils.db_helper import execute, fetch_all, fetch_one
 
@@ -24,7 +24,7 @@ def create_question(
     explanation=""
 ):
 
-    # INSERT dữ liệu vào bảng questions
+    # questionsテーブルにデータをINSERT
     return execute(
 
         """
@@ -41,7 +41,7 @@ def create_question(
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
 
-        # Dữ liệu truyền vào tương ứng với dấu ?
+        # ? に対応するパラメータ
         (
             level,
             question,
@@ -61,9 +61,9 @@ def create_question(
 
 def get_questions(level, limit=None):
 
-    # SQL cơ bản:
-    # - lấy tất cả câu hỏi theo level
-    # - RANDOM() để random đề mỗi lần làm bài
+    # SQL 基本:
+    # - level による全問題取得
+    # - RANDOM() で毎回異なる出題順にする
 
     query = """
         SELECT *
@@ -75,10 +75,10 @@ def get_questions(level, limit=None):
     # Danh sách parameter truyền vào SQL
     params = [level]
 
-    # Nếu có giới hạn số câu
-    # Ví dụ:
+    # limit がある場合
+    # 例:
     # limit = 10
-    # -> chỉ lấy 10 câu
+    # -> 10問のみ取得
 
     if limit:
 
@@ -86,7 +86,7 @@ def get_questions(level, limit=None):
 
         params.append(limit)
 
-    # Trả về nhiều dòng dữ liệu
+    # 複数行データを返す
     return fetch_all(
 
         query,
@@ -102,8 +102,8 @@ def get_questions(level, limit=None):
 
 def count_questions(level=None):
 
-    # Nếu có truyền level
-    # -> đếm theo cấp độ
+    # level が渡された場合
+    # -> レベル別の件数をカウント
 
     if level:
 
@@ -119,8 +119,8 @@ def count_questions(level=None):
 
         )["total"]
 
-    # Nếu không truyền level
-    # -> đếm toàn bộ câu hỏi
+    # level が渡されない場合
+    # -> 全問題数をカウント
 
     return fetch_one(
 

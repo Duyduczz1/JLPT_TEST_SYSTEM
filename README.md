@@ -1,31 +1,41 @@
-# JLPT Test System (N1-N5)
+## 開発概要
 
-Dự án Flask để luyện thi JLPT với đăng nhập, đăng ký, chọn cấp độ N1–N5, làm bài 10–50 câu, chấm điểm, lịch sử và bảng xếp hạng.
+本プロジェクトは、JLPT（日本語能力試験）受験者向けのオンライン学習・模擬試験システムとして、企画・設計・開発・テストまで全て個人で実施しました。
 
-## Chạy bằng VS Code
+開発期間は約1週間で、要件定義からデータベース設計、バックエンド開発、フロントエンド実装、テストおよびデプロイまで一貫して担当しました。
 
-```bash
+開発にあたっては、Claude AIを活用しながら実装方針の検討やコードレビューを行い、開発効率の向上を図りました。ただし、システム設計および機能実装、デバッグ、最終的なコードの統合はすべて自身で行っています。
 
-cd C:\web_app\JLPT-TEST-WEB
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-python database/create_db.py
-python database/seed_questions.py
-python app.py
+### 主な機能
 
-```
+* ユーザー登録・ログイン機能
+* JLPT N1〜N5レベル選択機能
+* 10問〜50問の模擬試験機能
+* 自動採点機能
+* 受験履歴管理機能
+* ランキング機能
+* 管理者向け問題管理機能
+* 試験タイマー機能
 
-Mở trình duyệt: http://127.0.0.1:5000
+### 使用技術
+
+* Backend: Python, Flask
+* Frontend: HTML, CSS, JavaScript
+* Database: SQLite
+* Deployment: Render
+* Development Support: Claude AI
+
+### 工夫した点
+
+* JLPTレベル別に問題を管理できるデータベース構造を設計
+* 受験結果やランキングをリアルタイムで反映する仕組みを実装
+* ユーザーが実際の試験環境に近い形で学習できるよう試験タイマー機能を追加
+* Renderへデプロイし、インターネット経由で利用可能な環境を構築
+
 
 https://jlpt-test-system.onrender.com
-Tài khoản admin mặc định:
+デフォルト管理者アカウント:
 
 - Email: admin@jlpt.local
-- Mật khẩu: Duyduc1112
+- パスワード: ****
 
-Nội dung
-Flask routes cho auth, exam, result, history, ranking và admin.
-SQLite database với users, questions, results.
-Dữ liệu mẫu cho N1–N5.
-Giao diện HTML/CSS/JS có timer làm bài.

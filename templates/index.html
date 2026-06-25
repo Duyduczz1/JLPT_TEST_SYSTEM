@@ -1,50 +1,50 @@
 {% extends "base.html" %}
 
 {# =========================================================
-Trang chủ hệ thống luyện thi JLPT
+JLPT学習サイトホーム
 ========================================================= #}
 
 {% block title %}
-Trang chủ - JLPT Test
+ホーム - JLPT Test
 {% endblock %}
 
 {% block content %}
 
 <!-- ======================================================
-     HERO SECTION
-     Phần giới thiệu chính của trang
+     ヒーローセクション
+     サイトの主要紹介部分
      ====================================================== -->
 <section class="hero">
 
   <div>
 
-    <!-- Dòng chữ nhỏ phía trên tiêu đề -->
+    <!-- 見出しの上の小さなテキスト -->
     <p class="eyebrow">
-      Luyện thi JLPT từ N5 đến N1
+      N5からN1までのJLPT対策
     </p>
 
-    <!-- Tiêu đề chính -->
+    <!-- メインタイトル -->
     <h1>
-      Luyện thi JLPT nhanh gọn, dễ sử dụng và dễ theo dõi tiến bộ.
+      JLPTの勉強を手軽に、使いやすく、進捗をしっかり管理します。
     </h1>
 
-    <!-- Mô tả ngắn -->
+    <!-- 簡単な説明 -->
     <p>
-      Chọn cấp độ phù hợp, làm bài theo số câu mong muốn
-      và xem kết quả ngay sau khi nộp bài.
+      レベルに合わせた問題を選び、希望の問題数で解答し、
+      提出後すぐに結果を確認できます。
     </p>
 
-    <!-- Nhóm nút chức năng -->
+    <!-- アクションボタン -->
     <div class="actions">
 
-      <!-- Nút bắt đầu làm bài -->
+      <!-- テスト開始ボタン -->
       <a class="button" href="{{ url_for('exam.levels') }}">
-        Bắt đầu làm bài
+        テストを始める
       </a>
 
-      <!-- Nút đăng nhập -->
+      <!-- ログインボタン -->
       <a class="button ghost" href="{{ url_for('auth.login') }}">
-        Đăng nhập
+        ログイン
       </a>
 
     </div>
@@ -54,37 +54,34 @@ Trang chủ - JLPT Test
 </section>
 
 <!-- ======================================================
-     PHẦN GIỚI THIỆU TÍNH NĂNG
+     機能紹介セクション
      ====================================================== -->
 <section class="grid three">
 
-  <!-- Tính năng 1 -->
+  <!-- 機能1 -->
   <article>
-    <h3>5 cấp độ JLPT</h3>
+    <h3>JLPTの5つのレベル</h3>
 
     <p>
-      Hỗ trợ đầy đủ các cấp độ:
-      N5, N4, N3, N2 và N1.
+      N5からN1までの全レベルに対応しています。
     </p>
   </article>
 
-  <!-- Tính năng 2 -->
+  <!-- 機能2 -->
   <article>
-    <h3>Chấm điểm tự động</h3>
+    <h3>自動採点</h3>
 
     <p>
-      Hệ thống tự động tính điểm,
-      hiển thị số câu đúng và gợi ý ôn tập.
+      システムが自動で採点し、正答数と復習のアドバイスを表示します。
     </p>
   </article>
 
-  <!-- Tính năng 3 -->
+  <!-- 機能3 -->
   <article>
-    <h3>Lịch sử và bảng xếp hạng</h3>
+    <h3>履歴とランキング</h3>
 
     <p>
-      Theo dõi kết quả làm bài
-      và so sánh điểm số với người khác.
+      テスト結果を記録し、他のユーザーとスコアを比較できます。
     </p>
   </article>
 

@@ -1,30 +1,30 @@
 <!doctype html>
 
-<html lang="vi">
+<html lang="ja">
 
 <head>
 
   <!-- =====================================================
-       CÀI ĐẶT CƠ BẢN
+       基本設定
        ===================================================== -->
 
-  <!-- Bộ mã tiếng Việt -->
+  <!-- エンコーディング -->
   <meta charset="utf-8">
 
-  <!-- Responsive cho điện thoại -->
+  <!-- レスポンシブ -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Tiêu đề trang -->
+  <!-- ページタイトル -->
   <title>
     {% block title %}
     JLPT Test System
     {% endblock %}
   </title>
 
-  <!-- File CSS chính -->
+  <!-- メインCSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-  <!-- Block mở rộng cho CSS riêng từng trang -->
+  <!-- ページ固有CSS -->
   {% block head %}
   {% endblock %}
 
@@ -33,72 +33,72 @@
 <body>
 
   <!-- =====================================================
-       THANH MENU ĐẦU TRANG
+       ナビゲーションバー
        ===================================================== -->
   <nav class="topbar">
 
-    <!-- Logo / tên hệ thống -->
+    <!-- ロゴ / システム名 -->
     <a class="brand" href="{{ url_for('index') }}">
       JLPT Test
     </a>
 
-    <!-- Các liên kết menu -->
+    <!-- メニューリンク -->
     <div class="navlinks">
 
       <!-- ================================================
-           Nếu người dùng đã đăng nhập
+           ログイン済みの場合
            ================================================ -->
       {% if session.get('user_id') %}
 
-      <!-- Trang dashboard -->
+      <!-- ダッシュボード -->
       <a href="{{ url_for('dashboard') }}">
-        Trang chủ
+        ホーム
       </a>
 
-      <!-- Trang làm bài -->
+      <!-- テストページ -->
       <a href="{{ url_for('exam.levels') }}">
-        Làm bài
+        テスト
       </a>
 
-      <!-- Lịch sử làm bài -->
+      <!-- 履歴ページ -->
       <a href="{{ url_for('history.history') }}">
-        Lịch sử
+        履歴
       </a>
 
-      <!-- Bảng xếp hạng -->
+      <!-- ランキング -->
       <a href="{{ url_for('ranking.ranking') }}">
-        BXH
+        ランキング
       </a>
 
       <!-- ============================================
-             Nếu là admin thì hiển thị menu Admin
+             管理者メニューを表示
              ============================================ -->
       {% if session.get('role') == 'admin' %}
 
       <a href="{{ url_for('admin.dashboard') }}">
-        Admin
+        管理者
       </a>
 
       {% endif %}
 
-      <!-- Đăng xuất -->
+      <!-- ログアウト -->
       <a href="{{ url_for('auth.logout') }}">
-        Đăng xuất
+        ログアウト
       </a>
 
       <!-- ================================================
-           Nếu chưa đăng nhập
+           未ログインの場合
            ================================================ -->
       {% else %}
 
-      <!-- Đăng nhập -->
+      <!-- ログイン -->
       <a href="{{ url_for('auth.login') }}">
-        Đăng nhập
+        ログイン
       </a>
 
-      <!-- Đăng ký -->
+      <!-- 登録 -->
       <a class="button small" href="{{ url_for('auth.register') }}">
-        Đăng ký
+        登録
       </a>
 
       {% endif %}
@@ -108,16 +108,16 @@
   </nav>
 
   <!-- =====================================================
-       NỘI DUNG CHÍNH
+       メインコンテンツ
        ===================================================== -->
   <main class="container">
 
     <!-- ================================================
-         Hiển thị thông báo Flash Message
-         Ví dụ:
-         - Đăng nhập thành công
-         - Sai mật khẩu
-         - Đăng ký thành công
+         フラッシュメッセージを表示
+         例：
+         - ログイン成功
+         - パスワードが違います
+         - 登録成功
          ================================================ -->
     {% with messages = get_flashed_messages(with_categories=true) %}
 
@@ -131,18 +131,18 @@
 
     {% endwith %}
 
-    <!-- Nội dung riêng của từng trang -->
+    <!-- ページ固有コンテンツ -->
     {% block content %}
     {% endblock %}
 
   </main>
 
   <!-- =====================================================
-       FILE JAVASCRIPT CHÍNH
+       メインJS
        ===================================================== -->
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
-  <!-- Block mở rộng cho JS riêng từng trang -->
+  <!-- ページ固有JS -->
   {% block scripts %}
   {% endblock %}
 
